@@ -18,6 +18,20 @@ public class User {
     private String LOCATION;
     private String ROLE;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "ID=" + ID +
+                ", EMAIL='" + EMAIL + '\'' +
+                ", FIRSTNAME='" + FIRSTNAME + '\'' +
+                ", LASTNAME='" + LASTNAME + '\'' +
+                ", PASSWORD='" + PASSWORD + '\'' +
+                ", ADDRESS='" + ADDRESS + '\'' +
+                ", LOCATION='" + LOCATION + '\'' +
+                ", ROLE='" + ROLE + '\'' +
+                '}';
+    }
+
     public int getID() {
         return ID;
     }
