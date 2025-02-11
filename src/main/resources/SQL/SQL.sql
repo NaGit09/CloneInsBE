@@ -1,76 +1,75 @@
 -- CREATE DATA BASE 
 CREATE DATABASE INS ;
 USE INS;
-
+DROP DATABASE INS;
 -- Bảng Users
 CREATE TABLE Users (
-    UserId INT PRIMARY KEY AUTO_INCREMENT,
-    Username VARCHAR(50) UNIQUE NOT NULL,
-    FullName VARCHAR(100),
-    Email VARCHAR(100) UNIQUE,
-    PasswordHash VARCHAR(255) NOT NULL,
-    ProfilePicture VARCHAR(255),
-    Bio VARCHAR(255),
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_name VARCHAR(50) UNIQUE NOT NULL,
+    full_name VARCHAR(100),
+    email VARCHAR(100) UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    profile_picture VARCHAR(255),
+    bio VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 
 -- Bảng Posts
 CREATE TABLE Posts (
-    PostId INT PRIMARY KEY AUTO_INCREMENT,
-    UserId INT NOT NULL,
-    Caption VARCHAR(255),
-    ImageUrl VARCHAR(255),
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (UserId) REFERENCES Users(UserId) ON DELETE CASCADE
+    post_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    caption VARCHAR(255),
+    image_url VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
 
 
 CREATE TABLE Comments (
-    CommentId INT PRIMARY KEY AUTO_INCREMENT,
-    PostId INT NOT NULL,
-    UserId INT NOT NULL,
-    Content VARCHAR(255) NOT NULL,
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (PostId) REFERENCES Posts(PostId) ON DELETE CASCADE,
-    FOREIGN KEY (UserId) REFERENCES Users(UserId) ON DELETE CASCADE
+    comment_id INT PRIMARY KEY AUTO_INCREMENT,
+    post_id INT NOT NULL,
+    user_id INT NOT NULL,
+    content VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (post_id) REFERENCES Posts(post_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
 
 -- Bảng Likes
 CREATE TABLE Likes (
-    LikeId INT PRIMARY KEY AUTO_INCREMENT,
-    PostId INT NOT NULL,
-    UserId INT NOT NULL,
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (PostId) REFERENCES Posts(PostId) ON DELETE CASCADE,
-    FOREIGN KEY (UserId) REFERENCES Users(UserId) ON DELETE CASCADE
+    like_id INT PRIMARY KEY AUTO_INCREMENT,
+    post_id INT NOT NULL,
+    user_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (post_id) REFERENCES Posts(post_id) ON DELETE CASCADE
 );
 
 -- Bảng Follows
 CREATE TABLE Follows (
-    FollowId INT PRIMARY KEY AUTO_INCREMENT,
-    FollowerId INT NOT NULL,
-    FollowedId INT NOT NULL,
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (FollowerId) REFERENCES Users(UserId) ON DELETE CASCADE,
-    FOREIGN KEY (FollowedId) REFERENCES Users(UserId) ON DELETE CASCADE
+    follow_id INT PRIMARY KEY AUTO_INCREMENT,
+    follower_id INT NOT NULL,
+    followed_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (follower_id) REFERENCES Users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (followed_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
 
 
 -- Bảng Messages
 CREATE TABLE Messages (
-    MessageId INT PRIMARY KEY AUTO_INCREMENT,
-    SenderId INT NOT NULL,
-    ReceiverId INT NOT NULL,
-    Content VARCHAR(500),
-    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (SenderId) REFERENCES Users(UserId) ON DELETE CASCADE,
-    FOREIGN KEY (ReceiverId) REFERENCES Users(UserId) ON DELETE CASCADE
+    message_id INT PRIMARY KEY AUTO_INCREMENT,
+    sender_id INT NOT NULL,
+    receiver_id INT NOT NULL,
+    content VARCHAR(500),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (sender_id) REFERENCES Users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (receiver_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
 
 -- EXAMPLE DATA 
 -- Thêm người dùng
-INSERT INTO Users (UserId, Username, FullName, Email, PasswordHash, ProfilePicture, Bio) 
+INSERT INTO Users 
 VALUES (1, 'NHUTANH09', 'TRAN NHUT ANH', 'nhutanhtran806@gmail.com', 'sfp525kf', '....', 'my love is anh');
 
 -- Thêm bài viết
@@ -93,4 +92,11 @@ VALUES (1, 1);
 INSERT INTO Messages (SenderId, ReceiverId, Content) 
 VALUES (1, 1, 'Hello there!');
 -- 
-select * from users
+select * from users;
+ALTER TABLE users
+    DROP COLUMN user_id,
+    DROP COLUMN created_at,
+    DROP COLUMN full_name,
+    DROP COLUMN password_hash,
+    DROP COLUMN profile_picture;
+

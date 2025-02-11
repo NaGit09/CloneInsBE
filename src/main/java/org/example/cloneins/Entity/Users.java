@@ -16,42 +16,27 @@ public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "UserId")
-    private Long userId;
-
-    @Column(name = "username", length = 255, nullable = false, unique = true)
-    private String username;
-
-    @Column(name = "FullName", length = 100)
-    private String fullName;
-
-    @Column(name = "email", length = 255, nullable = false, unique = true)
+    private Long user_id;
+    private String user_name;
+    private String full_name;
     private String email;
-
-    @Column(name = "PasswordHash", length = 255, nullable = false)
-    private String passwordHash;
-
-    @Column(name = "ProfilePicture", length = 255)
-    private String profilePicture;
-
-    @Column(name = "Bio", length = 255)
+    private String password_hash;
+    private String profile_picture;
     private String bio;
-
-    @Column(name = "CreatedAt", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime createdAt;
+    private LocalDateTime created_at;
 
     // Constructor không tham số (bắt buộc với JPA)
     public Users() {}
 
     // Constructor đầy đủ tham số
     public Users(String username, String fullName, String email, String passwordHash, String profilePicture, String bio) {
-        this.username = username;
-        this.fullName = fullName;
+        this.user_name = username;
+        this.full_name = fullName;
         this.email = email;
-        this.passwordHash = passwordHash;
-        this.profilePicture = profilePicture;
+        this.password_hash = passwordHash;
+        this.profile_picture = profilePicture;
         this.bio = bio;
-        this.createdAt = LocalDateTime.now();
+        this.created_at = LocalDateTime.now();
     }
 }
 
