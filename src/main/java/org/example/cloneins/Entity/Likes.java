@@ -1,20 +1,19 @@
 package org.example.cloneins.Entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.*;
+
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "comments")
 @Data
-public class Comments {
-
+@Table(name = "likes")
+public class Likes {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer comment_id;
+    private Integer like_id;
     private Integer post_id;
     private Integer user_id;
-    private String content;
     private LocalDateTime create_at;
-
 }

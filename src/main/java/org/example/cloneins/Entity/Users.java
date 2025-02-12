@@ -1,16 +1,15 @@
 package org.example.cloneins.Entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
 @Entity
+@Data
 @Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(name = "Email", columnNames = "email"),
-        @UniqueConstraint(name = "Username", columnNames = "username")
+        @UniqueConstraint(name = "Username", columnNames = "user_name")
 })
 public class Users {
 
@@ -25,18 +24,5 @@ public class Users {
     private String bio;
     private LocalDateTime created_at;
 
-    // Constructor không tham số (bắt buộc với JPA)
-    public Users() {}
-
-    // Constructor đầy đủ tham số
-    public Users(String username, String fullName, String email, String passwordHash, String profilePicture, String bio) {
-        this.user_name = username;
-        this.full_name = fullName;
-        this.email = email;
-        this.password_hash = passwordHash;
-        this.profile_picture = profilePicture;
-        this.bio = bio;
-        this.created_at = LocalDateTime.now();
-    }
 }
 
