@@ -19,11 +19,11 @@ public class UserController {
     }
     @GetMapping(path = "/{UserID}")
     public Users getUser(@PathVariable Long UserID) {
-        return this.userRepository.findById(UserID).get();
+        return this.userRepository.findById(UserID).orElse(null);
     }
-
     @PostMapping
     public String addUser(@RequestBody Users user) {
+        userRepository.save(user);
         return "Complete";
     }
 }
