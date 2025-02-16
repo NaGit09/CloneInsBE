@@ -16,13 +16,13 @@ public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long user_id;
-    private String user_name;
+    private String user_name; // ignore field
     private String full_name;
-    private String email;
-    private String password_hash;
+    private String email; // ignore field
+    private String password_hash; // ignore field
     private String profile_picture;
     private String bio;
-    private LocalDateTime created_at;
+    private LocalDateTime created_at; // ignore field
 
 }
 
